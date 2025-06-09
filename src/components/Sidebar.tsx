@@ -1,4 +1,3 @@
-
 import { 
   Monitor, 
   Video, 
@@ -8,7 +7,8 @@ import {
   Camera,
   HardDrive,
   Wifi,
-  AlertTriangle
+  AlertTriangle,
+  Users
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -23,6 +23,7 @@ export const Sidebar = ({ activePanel, setActivePanel, availableOptions }: Sideb
     { id: "live", label: "Live View", icon: Monitor },
     { id: "recordings", label: "Recordings", icon: Video },
     { id: "status", label: "System Status", icon: Activity },
+    { id: "users", label: "User Management", icon: Users },
     { id: "settings", label: "Settings", icon: Settings },
   ];
 

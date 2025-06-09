@@ -8,6 +8,7 @@ import { StatusPanel } from "@/components/StatusPanel";
 import { RecordingPanel } from "@/components/RecordingPanel";
 import { SettingsPanel } from "@/components/SettingsPanel";
 import { ProtectedRoute } from "@/components/ProtectedRoute";
+import Users from "./Users";
 
 const Index = () => {
   const [activePanel, setActivePanel] = useState("live");
@@ -30,6 +31,12 @@ const Index = () => {
         );
       case "status":
         return <StatusPanel />;
+      case "users":
+        return (
+          <ProtectedRoute permission="canManageUsers">
+            <Users />
+          </ProtectedRoute>
+        );
       case "settings":
         return (
           <ProtectedRoute permission="canAccessSettings">
@@ -58,6 +65,10 @@ const Index = () => {
     }
     
     options.push('status'); // Status is available to all users
+    
+    if (hasPermission('canManageUsers')) {
+      options.push('users');
+    }
     
     if (hasPermission('canAccessSettings')) {
       options.push('settings');
