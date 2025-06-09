@@ -1,11 +1,39 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+
+import { useState } from "react";
+import { Sidebar } from "@/components/Sidebar";
+import { CameraGrid } from "@/components/CameraGrid";
+import { TopBar } from "@/components/TopBar";
+import { StatusPanel } from "@/components/StatusPanel";
+import { RecordingPanel } from "@/components/RecordingPanel";
+import { SettingsPanel } from "@/components/SettingsPanel";
 
 const Index = () => {
+  const [activePanel, setActivePanel] = useState("live");
+  const [selectedCamera, setSelectedCamera] = useState<string | null>(null);
+
+  const renderMainContent = () => {
+    switch (activePanel) {
+      case "live":
+        return <CameraGrid selectedCamera={selectedCamera} setSelectedCamera={setSelectedCamera} />;
+      case "recordings":
+        return <RecordingPanel />;
+      case "status":
+        return <StatusPanel />;
+      case "settings":
+        return <SettingsPanel />;
+      default:
+        return <CameraGrid selectedCamera={selectedCamera} setSelectedCamera={setSelectedCamera} />;
+    }
+  };
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
+    <div className="min-h-screen bg-gray-900 text-white flex">
+      <Sidebar activePanel={activePanel} setActivePanel={setActivePanel} />
+      <div className="flex-1 flex flex-col">
+        <TopBar selectedCamera={selectedCamera} />
+        <main className="flex-1 p-4">
+          {renderMainContent()}
+        </main>
       </div>
     </div>
   );
