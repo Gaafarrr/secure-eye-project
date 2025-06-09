@@ -7,7 +7,7 @@ import {
   VolumeX, 
   Maximize, 
   Settings,
-  Recording,
+  Circle,
   Wifi,
   WifiOff
 } from "lucide-react";
@@ -51,7 +51,7 @@ export const CameraFeed = ({ camera, isSelected, onSelect }: CameraFeedProps) =>
   const getStatusIcon = (status: string) => {
     switch (status) {
       case "online": return <Wifi className="h-4 w-4" />;
-      case "recording": return <Recording className="h-4 w-4" />;
+      case "recording": return <Circle className="h-4 w-4 fill-current" />;
       case "offline": return <WifiOff className="h-4 w-4" />;
       default: return <WifiOff className="h-4 w-4" />;
     }
