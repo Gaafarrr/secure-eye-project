@@ -15,15 +15,19 @@ import { cn } from "@/lib/utils";
 interface SidebarProps {
   activePanel: string;
   setActivePanel: (panel: string) => void;
+  availableOptions: string[];
 }
 
-export const Sidebar = ({ activePanel, setActivePanel }: SidebarProps) => {
-  const menuItems = [
+export const Sidebar = ({ activePanel, setActivePanel, availableOptions }: SidebarProps) => {
+  const allMenuItems = [
     { id: "live", label: "Live View", icon: Monitor },
     { id: "recordings", label: "Recordings", icon: Video },
     { id: "status", label: "System Status", icon: Activity },
     { id: "settings", label: "Settings", icon: Settings },
   ];
+
+  // Filter menu items based on available options
+  const menuItems = allMenuItems.filter(item => availableOptions.includes(item.id));
 
   const systemInfo = [
     { label: "Cameras Online", value: "8/8", icon: Camera, status: "good" },
